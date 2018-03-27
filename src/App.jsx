@@ -13,7 +13,7 @@ class App extends Component {
       last: '',
       company: '',
       position: '',
-      text: ''
+      text: 'I am <first> <last> and I want to be <position> at <company>'
     }
 
     this.updateForm = this.updateForm.bind(this)
@@ -30,7 +30,8 @@ class App extends Component {
       <React.Fragment>
         <Header />
         <main>
-          <Form 
+          <Form
+            stuff={this.state} 
             onFormChange={this.updateForm}
           />
           <Page stuff={this.state}/>

@@ -27,7 +27,7 @@ class Form extends Component {
           <TextField
             name="last"
             id="lastName"
-            label="Last Name"
+            label="Last Name <last>"
             className="md-cell md-cell--bottom"
             onChange={this.handleChange}
           />
@@ -36,14 +36,14 @@ class Form extends Component {
           <TextField
             name="company"
             id="company"
-            label="Company Name"
+            label="Company Name <company>"
             className="md-cell md-cell--bottom"
             onChange={this.handleChange}
             />
           <TextField
             name="position"
             id="position"
-            label="Position Title"
+            label="Position Title <position>"
             className="md-cell md-cell--bottom"
             onChange={this.handleChange}
           />
@@ -55,7 +55,7 @@ class Form extends Component {
           lineDirection="right"
           rows={5}
           maxRows={0}
-          placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          value={this.props.stuff.text}
           className="md-cell md-cell--bottom"
           onChange={this.handleChange}
         />
