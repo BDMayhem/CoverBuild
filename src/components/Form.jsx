@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/Form.css';
-import { TextField } from 'react-md';
+import { TextField, Grid } from 'react-md';
 
 class Form extends Component {
   constructor(props) {
@@ -16,47 +16,47 @@ class Form extends Component {
   render() {
     return (
       <div className="form">
-        <div className="md-grid">
+        <Grid>
           <TextField
             name="first"
             id="firstName"
-            label="First Name <first>"
-            className="md-cell md-cell--bottom"
+            label="First Name"
+            className="md-cell md-cell--bottom md-cell--6 md-cell--4-tablet"
             onChange={this.handleChange}
             />
           <TextField
             name="last"
             id="lastName"
-            label="Last Name <last>"
-            className="md-cell md-cell--bottom"
+            label="Last Name"
+            className="md-cell md-cell--bottom md-cell--6 md-cell--4-tablet"
             onChange={this.handleChange}
           />
-        </div>
-        <div className="md-grid">
+        </Grid>
+        <Grid>
           <TextField
             name="company"
             id="company"
-            label="Company Name <company>"
-            className="md-cell md-cell--bottom"
+            label="Company Name"
+            className="md-cell md-cell--bottom md-cell--6 md-cell--4-tablet"
             onChange={this.handleChange}
             />
           <TextField
             name="position"
             id="position"
-            label="Position Title <position>"
-            className="md-cell md-cell--bottom"
+            label="Position Title"
+            className="md-cell md-cell--bottom md-cell--6 md-cell--4-tablet"
             onChange={this.handleChange}
           />
-        </div>
+        </Grid>
         <TextField
           name="text"
           id="text"
-          label="Type many letters"
+          label="Cover Letter Text - Use <first>, <last>, <company>, and <position>"
           lineDirection="right"
           rows={5}
           maxRows={0}
           value={this.props.stuff.text}
-          className="md-cell md-cell--bottom"
+          className="md-cell md-cell--bottom md-cell--12"
           onChange={this.handleChange}
         />
       </div>

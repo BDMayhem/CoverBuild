@@ -3,6 +3,7 @@ import './styles/App.css';
 import Header from './components/Header';
 import Form from './components/Form';
 import Page from './components/Page';
+import { Grid, Cell } from 'react-md';
 
 class App extends Component {
   constructor(props) {
@@ -29,13 +30,23 @@ class App extends Component {
     return (
       <React.Fragment>
         <Header />
-        <main>
-          <Form
-            stuff={this.state} 
-            onFormChange={this.updateForm}
-          />
-          <Page stuff={this.state}/>
-        </main>
+        <Grid>
+          <Cell
+            size={6}
+            tabletSize={8}
+          >
+            <Form
+              stuff={this.state} 
+              onFormChange={this.updateForm}
+            />
+          </Cell>
+          <Cell
+            size={6}
+            tabletSize={8}
+          >
+            <Page stuff={this.state}/>
+          </Cell>
+        </Grid>
       </React.Fragment>
     );
   }
