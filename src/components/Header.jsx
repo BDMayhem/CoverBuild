@@ -1,14 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../styles/Header.css';
 
-class Header extends Component {
-  render() {
-    return (
-      <React.Fragment>
-        <h1>Cover Letter Generator</h1>
-      </React.Fragment>
-    );
-  }
-}
+const Header = () => <h1>Cover Letter Generator</h1>
 
-export default Header;
+export default Header

@@ -22,6 +22,7 @@ class Form extends Component {
             id="firstName"
             label="First Name"
             className="md-cell md-cell--bottom md-cell--6 md-cell--4-tablet"
+            value={this.props.letter.first}
             onChange={this.handleChange}
             />
           <TextField
@@ -29,6 +30,7 @@ class Form extends Component {
             id="lastName"
             label="Last Name"
             className="md-cell md-cell--bottom md-cell--6 md-cell--4-tablet"
+            value={this.props.letter.last}
             onChange={this.handleChange}
           />
         </Grid>
@@ -38,6 +40,7 @@ class Form extends Component {
             id="company"
             label="Company Name"
             className="md-cell md-cell--bottom md-cell--6 md-cell--4-tablet"
+            value={this.props.letter.company}
             onChange={this.handleChange}
             />
           <TextField
@@ -45,6 +48,7 @@ class Form extends Component {
             id="position"
             label="Position Title"
             className="md-cell md-cell--bottom md-cell--6 md-cell--4-tablet"
+            value={this.props.letter.position}
             onChange={this.handleChange}
           />
         </Grid>
@@ -55,7 +59,7 @@ class Form extends Component {
           lineDirection="right"
           rows={5}
           maxRows={0}
-          value={this.props.stuff.text}
+          value={this.props.letter.text}
           className="md-cell md-cell--bottom md-cell--12"
           onChange={this.handleChange}
         />

@@ -18,12 +18,27 @@ class App extends Component {
     }
 
     this.updateForm = this.updateForm.bind(this)
+    this.save = this.save.bind(this)
+  }
+
+  save() {
+    localStorage.setItem('letters', JSON.stringify(this.state));
   }
 
   updateForm(event) {
     this.setState({
       [event.target.name]: event.target.value
-    })
+    }, this.save);
+  }
+
+  componentDidMount() {
+    //populate localstorage with initial data
+    if (localStorage['letters'] === undefined) {
+      localStorage.setItem('letters', JSON.stringify(this.state));
+    }
+    
+    //populate state with localstorage data
+    this.setState(JSON.parse(localStorage['letters']));
   }
 
   render() {
@@ -36,7 +51,7 @@ class App extends Component {
             tabletSize={8}
           >
             <Form
-              stuff={this.state} 
+              letter={this.state} 
               onFormChange={this.updateForm}
             />
           </Cell>
@@ -44,7 +59,7 @@ class App extends Component {
             size={6}
             tabletSize={8}
           >
-            <Page stuff={this.state}/>
+            <Page letter={this.state}/>
           </Cell>
         </Grid>
       </React.Fragment>

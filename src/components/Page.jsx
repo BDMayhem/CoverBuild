@@ -4,19 +4,17 @@ import { Paper } from 'react-md';
 
 class Page extends Component {
   render() {
-    const first = this.props.stuff.first;
-    const last = this.props.stuff.last;
-    const company = this.props.stuff.company;
-    const position = this.props.stuff.position;
-    const text = this.props.stuff.text;
+    const first = this.props.letter.first;
+    const last = this.props.letter.last;
+    const company = this.props.letter.company;
+    const position = this.props.letter.position;
+    const text = this.props.letter.text;
 
-    const newtext = text.replace(/<first>/, first)
-                        .replace(/<last>/, last)
-                        .replace(/<company>/, company)
-                        .replace(/<position>/, position);
+    const newtext = text.replace(/<first>/g, first)
+                        .replace(/<last>/g, last)
+                        .replace(/<company>/g, company)
+                        .replace(/<position>/g, position);
                         
-    console.log(newtext)
-
     return (
       <React.Fragment>
         <div className="page">
