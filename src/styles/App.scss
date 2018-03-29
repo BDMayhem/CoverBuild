@@ -1,9 +1,6 @@
-header {
+.main {
+  margin: 0 2em;
   background: #eee;
-}
-
-main {
-  background: #ddd;
   display: flex;
   justify-content: space-between;
 }
@@ -14,4 +11,8 @@ main {
   font-size: 1.1em;
   background: white;
   white-space: pre-wrap;
+}
+
+textarea {
+  overflow: hidden;
 }

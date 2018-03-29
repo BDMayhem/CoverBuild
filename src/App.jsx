@@ -45,7 +45,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <Header />
-        <Grid>
+        <Grid className="main">
           <Cell
             size={6}
             tabletSize={8}
