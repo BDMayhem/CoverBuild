@@ -18,6 +18,7 @@ class Page extends Component {
     return (
       <React.Fragment>
         <div className="page">
+          <h2>{this.props.letter.name} Cover Letter</h2>
           <Paper>
             {newtext}
           </Paper>
