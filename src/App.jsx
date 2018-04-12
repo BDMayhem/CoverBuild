@@ -10,25 +10,50 @@ class App extends Component {
     super(props);
 
     this.state = {
-      first: '',
-      last: '',
-      company: '',
-      position: '',
-      text: 'I am <first> <last> and I want to be <position> at <company>'
+      currentLetter: 1,
+      letterCounter: 2,
+      letters: [
+        {
+          name: 'default',
+          first: '',
+          last: '',
+          company: '',
+          position: '',
+          text: 'I am <first> <last> and I want to be <position> at <company>',
+          key: 0,
+        },
+        {
+          name: 'WebDev',
+          first: 'Brian',
+          last: 'Diaz',
+          company: 'Google',
+          position: 'Web Developer',
+          text: 'I am <first> <last> and I want to be <position> at <company>',
+          key: 1,
+        }
+      ]
     }
 
     this.updateForm = this.updateForm.bind(this)
-    this.save = this.save.bind(this)
-  }
-
-  save() {
-    localStorage.setItem('letters', JSON.stringify(this.state));
+    this.changeLetter = this.changeLetter.bind(this)
   }
 
   updateForm(event) {
+    let newLetters = this.state.letters;
+
+    newLetters[this.state.currentLetter][event.target.name] = event.target.value;
+
     this.setState({
-      [event.target.name]: event.target.value
-    }, this.save);
+      letters: newLetters
+    }, () => localStorage.setItem('letters', JSON.stringify(this.state)));
+  }
+
+  changeLetter(event) {
+    const currentLetter = this.state.letters.find((e) => e.name === event.target.textContent)
+    console.log(currentLetter.key)
+    this.setState({
+      currentLetter: currentLetter.key
+    })
   }
 
   componentDidMount() {
@@ -51,15 +76,17 @@ class App extends Component {
             tabletSize={8}
           >
             <Form
-              letter={this.state} 
+              letters={this.state.letters}
+              letter={this.state.letters[this.state.currentLetter]} 
               onFormChange={this.updateForm}
+              changeLetter={this.changeLetter}
             />
           </Cell>
           <Cell
             size={6}
             tabletSize={8}
           >
-            <Page letter={this.state}/>
+            <Page letter={this.state.letters[this.state.currentLetter]}/>
           </Cell>
         </Grid>
       </React.Fragment>
