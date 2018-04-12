@@ -1,18 +1,21 @@
 import React from 'react';
-import { Button, MenuButton, ListItem } from 'react-md';
+import { MenuButton, ListItem } from 'react-md';
+import AddLetter from './AddLetter';
 
 
 const Buttons = (props) => {
-  const beenClicked = (event) => {
+  const switchLetter = (event) => {
     event.preventDefault();
-    props.handleSelect(event)
+    props.handleSelect(event);
+  }
+
+  const handleAdd = (name) => {
+    props.handleAdd(name);
   }
 
   return(
   <React.Fragment>
-    <Button raised primary>
-      New Cover Letter
-    </Button>
+    <AddLetter handleAdd={handleAdd} />
     <MenuButton
       id="choose-letter"
       raised
@@ -21,12 +24,12 @@ const Buttons = (props) => {
         <ListItem
           key={e.key}
           primaryText={e.name}
-          onClick={beenClicked}
+          onClick={switchLetter}
         />
       ))}
       simplifiedMenu={false}
     >
-      Click
+      Switch Cover Letters
     </MenuButton>
   </React.Fragment>
 )}

@@ -36,6 +36,7 @@ class App extends Component {
 
     this.updateForm = this.updateForm.bind(this)
     this.changeLetter = this.changeLetter.bind(this)
+    this.newLetter = this.newLetter.bind(this)
   }
 
   updateForm(event) {
@@ -53,6 +54,27 @@ class App extends Component {
     console.log(currentLetter.key)
     this.setState({
       currentLetter: currentLetter.key
+    }, () => {console.log(this.state); localStorage.setItem('letters', JSON.stringify(this.state))})
+  }
+
+  newLetter(name) {
+    let letters = this.state.letters;
+    letters.push({
+      name,
+      first: this.state.letters[this.state.currentLetter].first,
+      last: this.state.letters[this.state.currentLetter].last,
+      company: this.state.letters[this.state.currentLetter].company,
+      position: this.state.letters[this.state.currentLetter].position,
+      text: this.state.letters[this.state.currentLetter].text,
+      key: this.state.letterCounter
+    });
+
+    this.setState({
+      letters,
+      currentLetter: this.state.letterCounter,
+      letterCounter: this.state.letterCounter + 1,
+    }, () => {
+      localStorage.setItem('letters', JSON.stringify(this.state))
     })
   }
 
@@ -80,6 +102,7 @@ class App extends Component {
               letter={this.state.letters[this.state.currentLetter]} 
               onFormChange={this.updateForm}
               changeLetter={this.changeLetter}
+              newLetter={this.newLetter}
             />
           </Cell>
           <Cell
