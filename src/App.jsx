@@ -10,11 +10,11 @@ class App extends Component {
     super(props);
 
     this.state = {
-      currentLetter: 1,
-      letterCounter: 2,
+      currentLetter: 0,
+      letterCounter: 1,
       letters: [
         {
-          name: 'default',
+          name: 'Default',
           first: '',
           last: '',
           company: '',
@@ -22,27 +22,20 @@ class App extends Component {
           text: 'I am <first> <last> and I want to be <position> at <company>',
           key: 0,
         },
-        {
-          name: 'WebDev',
-          first: 'Brian',
-          last: 'Diaz',
-          company: 'Google',
-          position: 'Web Developer',
-          text: 'I am <first> <last> and I want to be <position> at <company>',
-          key: 1,
-        }
       ]
     }
 
     this.updateForm = this.updateForm.bind(this)
     this.changeLetter = this.changeLetter.bind(this)
-    this.newLetter = this.newLetter.bind(this)
+    this.newLetter = this.newLetter.bind(this);
+    this.deleteLetter = this.deleteLetter.bind(this);
   }
 
   updateForm(event) {
+    const currentIndex = this.state.letters.findIndex(i => i.key === this.state.currentLetter);
     let newLetters = this.state.letters;
 
-    newLetters[this.state.currentLetter][event.target.name] = event.target.value;
+    newLetters[currentIndex][event.target.name] = event.target.value;
 
     this.setState({
       letters: newLetters
@@ -51,21 +44,21 @@ class App extends Component {
 
   changeLetter(event) {
     const currentLetter = this.state.letters.find((e) => e.name === event.target.textContent)
-    console.log(currentLetter.key)
     this.setState({
       currentLetter: currentLetter.key
-    }, () => {console.log(this.state); localStorage.setItem('letters', JSON.stringify(this.state))})
+    }, () => {localStorage.setItem('letters', JSON.stringify(this.state))})
   }
 
   newLetter(name) {
+    const currentIndex = this.state.letters.findIndex(i => i.key === this.state.currentLetter);
     let letters = this.state.letters;
     letters.push({
       name,
-      first: this.state.letters[this.state.currentLetter].first,
-      last: this.state.letters[this.state.currentLetter].last,
-      company: this.state.letters[this.state.currentLetter].company,
-      position: this.state.letters[this.state.currentLetter].position,
-      text: this.state.letters[this.state.currentLetter].text,
+      first: this.state.letters[currentIndex].first,
+      last: this.state.letters[currentIndex].last,
+      company: this.state.letters[currentIndex].company,
+      position: this.state.letters[currentIndex].position,
+      text: this.state.letters[currentIndex].text,
       key: this.state.letterCounter
     });
 
@@ -73,6 +66,19 @@ class App extends Component {
       letters,
       currentLetter: this.state.letterCounter,
       letterCounter: this.state.letterCounter + 1,
+    }, () => {
+      localStorage.setItem('letters', JSON.stringify(this.state))
+    })
+  }
+
+  deleteLetter() {
+    const letters = this.state.letters;
+    const toDelete = this.state.letters.findIndex(i => i.key === this.state.currentLetter);
+    letters.splice(toDelete, 1);
+
+    this.setState({
+      letters,
+      currentLetter: this.state.letters[0].key
     }, () => {
       localStorage.setItem('letters', JSON.stringify(this.state))
     })
@@ -89,6 +95,8 @@ class App extends Component {
   }
 
   render() {
+    const currentIndex = this.state.letters.findIndex(i => i.key === this.state.currentLetter);
+
     return (
       <React.Fragment>
         <Header />
@@ -99,17 +107,18 @@ class App extends Component {
           >
             <Form
               letters={this.state.letters}
-              letter={this.state.letters[this.state.currentLetter]} 
+              letter={this.state.letters[currentIndex]} 
               onFormChange={this.updateForm}
               changeLetter={this.changeLetter}
               newLetter={this.newLetter}
+              deleteLetter={this.deleteLetter}
             />
           </Cell>
           <Cell
             size={6}
             tabletSize={8}
           >
-            <Page letter={this.state.letters[this.state.currentLetter]}/>
+            <Page letter={this.state.letters[currentIndex]}/>
           </Cell>
         </Grid>
       </React.Fragment>

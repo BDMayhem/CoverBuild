@@ -10,6 +10,7 @@ class Form extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleChange(value, event) {
@@ -22,6 +23,10 @@ class Form extends Component {
 
   handleAdd(name) {
     this.props.newLetter(name)
+  }
+
+  handleDelete() {
+    this.props.deleteLetter()
   }
 
   render() {
@@ -80,6 +85,7 @@ class Form extends Component {
         menuItems={this.props.letters}
         handleSelect={this.handleSelect}
         handleAdd={this.handleAdd}
+        handleDelete={this.handleDelete}
       />
       </React.Fragment>
     );
